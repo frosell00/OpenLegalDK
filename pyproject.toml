@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "openlegaldk"
-version = "0.1.0"
-description = "Experimental Danish and EU legal citation extraction toolkit"
+version = "0.2.0"
+description = "Danish and EU legal citation extractor with official EUR-Lex links"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}
