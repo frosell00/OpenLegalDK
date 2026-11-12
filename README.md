@@ -94,7 +94,7 @@ matches = find_citations_with_sources("GDPR artikel 6", language="DA")
 print(matches[0]["official_source"]["url"])
 ```
 
-This feature **links** to official text; it does **not download, scrape, or validate** the article, check its legal status, or establish which provision applies in a specific case. Source links are currently generated only for GDPR articles 1–99.
+By default, this feature **only links** to official text; it does **not download, scrape, or validate** the article, check its legal status, or establish which provision applies in a specific case. Source links are currently generated only for GDPR articles 1–99. The optional `--fetch-articles` mode described below attempts retrieval from EUR-Lex, but does not verify whether the text is current or applicable.
 
 Or pipe text into the CLI for UTF-8 JSON output:
 
