@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OpenLegalDK: Åben juridisk citationsfinder med officielle EUR-Lex-links til GDPR.">
+  <meta name="color-scheme" content="light dark">
+  <title>OpenLegalDK · Legal citation explorer</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <header class="topbar"><span class="brand">⚖ OpenLegalDK</span><a href="https://github.com/frosell00/OpenLegalDK" rel="noopener noreferrer">GitHub ↗</a></header>
+  <main class="wrap">
+    <p class="eyebrow">OPEN SOURCE · EXPERIMENTAL LEGAL TECH</p>
+    <h1>Find henvisninger til lovgivning og retspraksis.</h1>
+    <p class="intro">Indsæt en juridisk tekst. OpenLegalDK genkender almindelige danske og EU-retlige kildehenvisninger og linker GDPR-artikler til EUR-Lex. Analysen sker lokalt i browseren.</p>
+    <section class="workspace" aria-label="Citatanalyse">
+      <div class="section-heading"><label for="input">Din juridiske tekst</label><div class="controls"><label for="lang">Kildesprog</label><select id="lang"><option value="DA">Dansk</option><option value="EN">English</option></select><button type="button" id="sample">Indsæt eksempel</button></div></div>
+      <textarea id="input" spellcheck="false" maxlength="30000" placeholder="F.eks. GDPR artikel 6, stk. 1, litra f og RPL § 478..."></textarea>
+      <div class="summary"><strong id="hits">0 fund</strong><button type="button" id="copy">Kopiér JSON</button></div>
+    </section>
+    <section class="analysis"><div class="panel"><h2>Fremhævet tekst</h2><div id="highlights" class="highlights" aria-live="polite"></div></div><div class="panel"><h2>Fundne henvisninger</h2><div id="results" class="results" aria-live="polite"></div></div></section>
+    <p id="status" class="status" role="status"></p>
+    <section class="limitations"><h2>Vigtige begrænsninger</h2><p>Dette er en eksperimentel genkender, ikke juridisk rådgivning. Den verificerer ikke henvisningernes eksistens, gældende ordlyd eller juridiske relevans. GDPR-links går til forordningen som offentliggjort hos EUR-Lex, ikke til en bestemt artikel eller den nødvendigvis gældende konsoliderede tekst. Kontroller altid primærkilden.</p></section>
+  </main>
+  <footer>OpenLegalDK · MIT License · Et open source-initiativ ved en jurastuderende på Københavns Universitet.</footer>
+</body>
+</html>
