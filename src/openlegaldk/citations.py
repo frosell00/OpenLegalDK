@@ -59,7 +59,8 @@ _RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
         "danish_act_section",
         re.compile(
             r"\b(?P<act>RPL|TL|KL|FVL|AFTL|STRFL|GRL|KBL|"
-            r"retsplejelov(?:en|ens)?|tinglysningslov(?:en|ens)?|"\n            r"købelov(?:en|ens)?|"
+            r"retsplejelov(?:en|ens)?|tinglysningslov(?:en|ens)?|"
+            r"købelov(?:en|ens)?|"
             r"konkurslov(?:en|ens)?|forvaltningslov(?:en|ens)?|"
             r"aftalelov(?:en|ens)?|straffelov(?:en|ens)?|"
             r"grundlov(?:en|ens)?)\s*"
