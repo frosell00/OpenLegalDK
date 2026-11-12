@@ -39,8 +39,10 @@ _RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
             r"\b(?:GDPR|databeskyttelsesforordning(?:en|ens)?)\s+"
             r"(?:art\.?|article|artikel)\s*"
             r"(?P<article>\d+[a-z]?)"
-            r"(?:(?:\s*\(\d+\))+|(?:,?\s*stk\.?\s*\d+))?"
-            r"(?:(?:\s*\([a-z]\))|(?:,?\s*litra\s+[a-z]))?",
+            r"(?:\s*\(\s*(?P<paragraph_en>\d+)\s*\)|"
+            r",?\s*stk\.?\s*(?P<paragraph_da>\d+))?"
+            r"(?:\s*\(\s*(?P<point_en>[a-z])\s*\)|"
+            r",?\s*litra\s+(?P<point_da>[a-z]))?",
             re.IGNORECASE,
         ),
     ),
@@ -111,6 +113,18 @@ def find_citations(text: str) -> list[Citation]:
             details = {
                 key: value for key, value in match.groupdict().items() if value is not None
             }
+            if kind == "gdpr_article":
+                paragraph = details.pop("paragraph_en", None) or details.pop("paragraph_da", None)
+                point = details.pop("point_en", None) or details.pop("point_da", None)
+                # Remove redundant language-specific capture slots, if present.
+                details.pop("paragraph_en", None)
+                details.pop("paragraph_da", None)
+                details.pop("point_en", None)
+                details.pop("point_da", None)
+                if paragraph:
+                    details["paragraph"] = paragraph
+                if point:
+                    details["point"] = point.lower()
             accepted.append(
                 Citation(kind, match.group(0), match.start(), match.end(), details)
             )
