@@ -49,5 +49,31 @@ class CitationRegressionTests(unittest.TestCase):
                 self.assertEqual(details["point"], "f")
 
 
+    def test_kbl_variants_and_offsets(self):
+        """Købeloven variants are recognized, without validating legal content."""
+        examples = (
+            "KBL § 17",
+            "Købeloven § 17",
+            "købelovens § 17, stk. 2, nr. 1",
+        )
+        for reference in examples:
+            source = f"Se {reference} i denne syntetiske tekst."
+            with self.subTest(reference=reference):
+                found = find_citations(source)
+                self.assertEqual(len(found), 1)
+                self.assertEqual(found[0].kind, "danish_act_section")
+                self.assertEqual(found[0].text, reference)
+                self.assertEqual(source[found[0].start:found[0].end], reference)
+
+    def test_kbl_does_not_imply_source_verification(self):
+        """Citation extraction alone does not create an official source link."""
+        from openlegaldk import find_citations_with_sources
+
+        matches = find_citations_with_sources("KBL § 17")
+        self.assertEqual(len(matches), 1)
+        self.assertNotIn("official_source", matches[0])
+
+
+
 if __name__ == "__main__":
     unittest.main()
